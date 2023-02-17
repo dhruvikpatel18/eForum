@@ -16,23 +16,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $_SESSION['loggedin'] = true;
                     $_SESSION['sno'] = $row['sno'];
                 $_SESSION['useremail'] = $email;
-                echo "loggedin" . $email;
-                header("Location: /eForum/index.php");
+                // echo "loggedin" . $email;
+                // $showAlert = true;
+                header("Location: /eForum/index.php?loginsuccess=true");
             }else{
-                echo "<script>
-                alert('Incorrect Password');
-                window.location.href='index.php';
-                </script>";
-            }  
+                $showError = "Your passwords do no matched!!";
+                
+            }
+            // header("Location: /eForum/index.php?loginsuccess=false&error=$showError");
         }else{
-            echo "
-            <script>
-            alert('Invalid email!!');
-                window.location.href='index.php';
-            </script>";
+            $showError = "Your verification is pending, please signup or go to your email";
+            header("Location: /eForum/index.php?loginsuccess=false&error=$showError");
         }
         
+    }else{
+        $showError="Invalid email!";
+        header("Location: /eForum/index.php?loginsuccess=false&error=$showError");
     }
-    header("Location: /eForum/index.php");
+    
 }   
 ?>

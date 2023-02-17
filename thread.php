@@ -11,24 +11,9 @@
     #ques {
         min-height: 280px;
     }
-
-    @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
-
-
-
-
-    .like__btn {
-        padding: 5px 10px;
-        background: white;
-        font-size: 10px;
-        font-family: "Open Sans", sans-serif;
-        border-radius: 8px;
-        color: red;
-        outline: none;
-        border: none;
-        cursor: pointer;
-    }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
 </head>
 
@@ -137,10 +122,7 @@
             <div class="media-body">
             <p class="font-weight-bold my-0">'.$row2['user_email'].' modified:'.$comment_time.'</p>
                         ' . $content . '
-                        <button class="like__btn">
-   <span id="icon"><i class="far fa-thumbs-up"></i></span>
-   <span id="count">0</span> Like
-</button>
+                        
             </div>
         </div>';
         }
@@ -168,26 +150,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous">
     </script>
-    <script>
-    const likeBtn = document.querySelector(".like__btn");
-    let likeIcon = document.querySelector("#icon"),
-        count = document.querySelector("#count");
 
-    let clicked = false;
-
-
-    likeBtn.addEventListener("click", () => {
-        if (!clicked) {
-            clicked = true;
-            likeIcon.innerHTML = `<i class="fas fa-thumbs-up"></i>`;
-            count.textContent++;
-        } else {
-            clicked = false;
-            likeIcon.innerHTML = `<i class="far fa-thumbs-up"></i>`;
-            count.textContent--;
-        }
-    });
-    </script>
 </body>
 
 </html>

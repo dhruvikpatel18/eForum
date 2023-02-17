@@ -36,7 +36,8 @@
         //insert thread into threds database
         $th_title = $_POST['title'];
         $th_desc = $_POST['desc'];
-        $sql = "INSERT INTO `threads` (`thread_title`,`thread_desc`,`thread_cat_id`,`thread_user_id`,`timestamp`) VALUES ('$th_title' , '$th_desc' , '$id' , '0' , current_timestamp())";
+        $sno = $_POST['sno'];
+        $sql = "INSERT INTO `threads` (`thread_title`,`thread_desc`,`thread_cat_id`,`thread_user_id`,`timestamp`) VALUES ('$th_title' , '$th_desc' , '$id' , '$sno' , current_timestamp())";
         $result = mysqli_query($conn, $sql);
         $showAlert = true;
         if ($showAlert) {
@@ -74,8 +75,9 @@
         <input required type="text" id="title" name="title" class="form-control" aria-describedby="emailHelp"
             placeholder="Enter Your Problem">
         <small id="emailHelp" class="form-text text-muted">Keep your title as short and crisp as
-            possible</small>
+            possible.</small>
     </div>
+    <input type="hidden" name="sno" value="'. $_SESSION["sno"] .'">
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Describe your problem</label>
         <textarea required class="form-control" id="desc" name="desc" rows="3"></textarea>
@@ -106,16 +108,15 @@
             $desc = $row['thread_desc'];
             $thread_time = $row['timestamp'];
             $thread_user_id = $row['thread_user_id'];
-            $sql2 = "Select user_email from users where sno='$thread_user_id'";
+            $sql2 = "SELECT user_email FROM `users` WHERE sno='$thread_user_id'";
             $result2 = mysqli_query($conn, $sql2);
             $row2 = mysqli_fetch_assoc($result2);
                 
-
             echo '<div class="media my-3">
             <img class="mr-3" src="photos/user.png" width="40px" alt="Generic placeholder image">
             <div class="media-body">
                 '.'<h5 class="mt-0"><a class="text-dark" href="thread.php?threadid=' . $id . '">'. $title . '</a></h5>' . $desc . '
-            </div>'.'<div class="font-weight-bold my-0">'.$row2['user_email'].' modified at:'.$thread_time.'</div>'.'
+            </div>'.'<div class="font-weight-bold my-0">'.$row2["user_email"].' modified at:'.$thread_time.'</div>'.'
         </div>';
         }
         if ($noResult) {

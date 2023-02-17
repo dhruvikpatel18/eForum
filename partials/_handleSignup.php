@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($conn, $existSql);
     $numRows = mysqli_num_rows($result);
     if ($numRows > 0) {
-        $showError = "Email is already used, Please enter correct email!";
+        $showError = "Email already exist!!";
     } else {
         if ($pass == $cpass) {
             $hash = password_hash($pass, PASSWORD_DEFAULT);
@@ -71,13 +71,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } else {
             
-            echo"<script>
-            alert('Server down');
-            window.location.href='index.php';
-        </script>";
+        //     echo"<script>
+        //     alert('Server down');
+        //     window.location.href='index.php';
+        // </script>";
         $showError = "Your passwords do no matched!!";
-    header("Location: /eForum/index.php?signupsuccess=false&error=$showError");
+        header("Location: /eForum/index.php?signupsuccess=false&error=$showError");
         }
     }
+    header("Location: /eForum/index.php?signupsuccess=false&error=$showError");
+
 }
 ?>

@@ -56,10 +56,30 @@ if (isset($_GET['signupsuccess']) && $_GET['signupsuccess'] == "true") {
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>';
 }
-if ($_GET['signupsuccess'] == "false") {
-  echo '<div class="alert alert-danger alert-dismissible fade show my-0" role="alert">
-  <strong>Failed!</strong> do not matched credentials!!
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
+if (isset($_GET['signupsuccess']) && $_GET['signupsuccess'] == "false" ) {
+  echo "<div class='alert alert-danger alert-dismissible fade show my-0' role='alert'>
+  <strong>Failed!</strong> $_GET[error]
+  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+</div>";
 }
+
+if (isset($_GET['loginsuccess'])&& $_GET['loginsuccess'] == "true" ) {
+  echo "<div class='alert alert-success alert-dismissible fade show my-0' role='alert'>
+  <strong>Success!</strong> You are loggedin successfully!
+  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+</div>";
+}
+if (isset($_GET['loginsuccess'])&& $_GET['loginsuccess'] == "false" ) {
+  echo "<div class='alert alert-danger alert-dismissible fade show my-0' role='alert'>
+  <strong>Failed!</strong> $_GET[error]
+  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+</div>";
+}
+if (isset($_GET['logoutsuccess'])&& $_GET['logoutsuccess'] == "true" ) {
+  echo "<div class='alert alert-success alert-dismissible fade show my-0' role='alert'>
+  <strong>Success!</strong> You are logged out, we hope that you find eDiscuss useful!
+  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+</div>";
+}
+
 ?>
