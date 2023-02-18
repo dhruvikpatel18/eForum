@@ -45,9 +45,10 @@
     }
 
     body {
-        background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        /* background: linear-gradient(45deg, #ee7752, #23d5ab, #23a6d5, #23d5ab); */
+        background: linear-gradient(45deg, #7393B3, #D3D3D3, #B2BEB5, #C0C0C0);
         background-size: 400% 400%;
-        animation: gradient 8s ease infinite;
+        animation: gradient 10s ease infinite;
     }
 
     @keyframes gradient {

@@ -1,3 +1,45 @@
+<?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+function sendmail($user_email,$comment_by){
+    require("PHPMailer/PHPMailer.php");
+    require("PHPMailer/SMTP.php");
+    require("PHPMailer/Exception.php");
+
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;        
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'dhruvikmalaviya18@gmail.com';                     //SMTP username
+        $mail->Password   = 'okaoqrsxritbubdd';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+        $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+        //Recipients
+        $mail->setFrom('dhruvikmalaviya18@gmail.com', 'eDiscuss');
+        $mail->addAddress($user_email);     //Add a recipient
+         
+    
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'new comment in your view';
+        $mail->Body    = "You got one comment from $comment_by";
+        
+        
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        return false;
+    }
+
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -7,14 +49,42 @@
     <title>Welcome to eDiscuss - Coding Forums</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
     <style>
     #ques {
         min-height: 280px;
     }
-    </style>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
-        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        background: linear-gradient(45deg, #ee7752, #23d5ab, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 30s ease infinite;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    </style>
 </head>
 
 <body>
@@ -51,11 +121,13 @@
         $sql = "INSERT INTO `comments` ( `comment_content`, `thread_id`, `comment_by`, `comment_time`)VALUES ('$comment', '$id', '$sno', current_timestamp())";
         $result = mysqli_query($conn, $sql);
         $showAlert = true;
+        sendmail($posted_by,$row2['user_email']);
         if ($showAlert) {
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
   <strong>Added!</strong> Your Comment has been added! 
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>';
+
         }
     }
     ?>
@@ -90,6 +162,7 @@
         <button type="submit" class="btn btn-success my-2">Post View</button>
     </form>
 </div>';
+
     }else{
         echo '
         <div class="container">
@@ -121,21 +194,22 @@
             <img class="mr-3" src="photos/user.png" width="40px" alt="Generic placeholder image">
             <div class="media-body">
             <p class="font-weight-bold my-0">'.$row2['user_email'].' modified:'.$comment_time.'</p>
-                        ' . $content . '
+                        ' . $content.' </div>
+                        </div>';
                         
-            </div>
-        </div>';
-        }
-        if ($noResult) {
-            echo '<div class="jumbotron jumbotron-fluid">
-            <div class="container">
-              <h1 class="display-6">No Comments post till now!!</h1>
-              <p class="lead">Be the first persion to post comments </p>
-            </div>
-          </div>';
-        }
-        ?>
+
+    }
+    if ($noResult) {
+    echo '<div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-6">No Comments post till now!!</h1>
+            <p class="lead">Be the first persion to post comments </p>
+        </div>
+    </div>';
+    }
+    ?>
     </div>
+
 
 
     <?php include 'partials/_footer.php'; ?>

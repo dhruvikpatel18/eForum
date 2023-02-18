@@ -17,6 +17,32 @@
         text-align: center;
         text-decoration: underline;
     }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        background: linear-gradient(45deg, #7393B3, #D3D3D3, #B2BEB5, #C0C0C0);
+        background-size: 400% 400%;
+        animation: gradient 30s ease infinite;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
     </style>
 
 </head>
@@ -82,7 +108,7 @@
                 <label for="exampleFormControlTextarea2">Elaborate Your Concern</label>
                 <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
             </div>
-            <button class="btn btn-primary">Submit</button>
+            <button class="btn btn-primary my-3">Submit</button>
         </form>
 
     </div>
