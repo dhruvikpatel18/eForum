@@ -1,10 +1,51 @@
+<style>
+.navbar .navbar-nav .nav-link:hover {
+    color: gray;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: white;
+    font-size: 1.1em;
+}
+
+.navbar .navbar-nav .nav-item {
+    position: relative;
+}
+
+.navbar .navbar-nav .nav-item::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: gray;
+    width: 0%;
+    content: "";
+    height: 4px;
+}
+
+.navbar .navbar-nav .nav-item:hover::after {
+    width: 100%;
+}
+
+/* .navbar-brand {
+    color: lightgreen;
+}
+
+.navbar-brand:hover {
+    color: lightgray;
+} */
+.navbar-brand .logo {
+    width: 100px;
+}
+</style>
 <?php
-include('\style.css');
-include('\index.js');
 session_start();
 echo '<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 <div class="container-fluid">
-  <a class="navbar-brand" href="/eForum">eDiscuss</a>
+  <a class="navbar-brand" href="/eForum">
+  <img class="logo" src="/eForum/photos/logo-2.svg" alt="..." height="50" width="70">
+  </a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -28,7 +69,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
   echo '<form class="d-flex mx-2" role="search" method="get" action = "search.php">
       <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-success" type="submit">Search</button>
-      <p class="text-light my-0 mx-4">Welcome ' . $username . '</p>
+      <p class="text-light my-0 mx-4 ">Welcome ' . $username . '</p>
       <a href="partials/_logout.php"class="btn btn-outline-success ml-2">Logout</a>
     </form>';
 } else {

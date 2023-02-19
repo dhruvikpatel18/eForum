@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to eDiscuss - Coding Forums</title>
+    <title><?php echo $_GET['search']?> | eDiscuss</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="shortcut icon" href="/eForum/photos/logo-2.svg" type="image/x-icon" />
     <style>
     .carousel-inner>.carousel-item>img {
         width: 1500px;
@@ -15,6 +16,19 @@
 
     #container {
         min-height: 87.5vh;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        /* background: linear-gradient(45deg, #ee7752, #23d5ab, #23a6d5, #23d5ab); */
+        background: linear-gradient(45deg, #7393B3, #D3D3D3, #B2BEB5, #C0C0C0);
+        background-size: 400% 400%;
+        animation: gradient 10s ease infinite;
     }
     </style>
 </head>

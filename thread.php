@@ -3,7 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-function sendmail($user_email,$comment_by){
+function sendmail($user_email){
     require("PHPMailer/PHPMailer.php");
     require("PHPMailer/SMTP.php");
     require("PHPMailer/Exception.php");
@@ -29,7 +29,8 @@ function sendmail($user_email,$comment_by){
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = 'new comment in your view';
-        $mail->Body    = "You got one comment from $comment_by";
+        $mail->Body    = "Hurry up! Check your view, which you posted on eDiscuss
+        someone has commented on your view.";
         
         
         $mail->send();
@@ -53,6 +54,7 @@ function sendmail($user_email,$comment_by){
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="shortcut icon" href="/eForum/photos/logo-2.svg" type="image/x-icon" />
 
     <style>
     #ques {
@@ -121,7 +123,7 @@ function sendmail($user_email,$comment_by){
         $sql = "INSERT INTO `comments` ( `comment_content`, `thread_id`, `comment_by`, `comment_time`)VALUES ('$comment', '$id', '$sno', current_timestamp())";
         $result = mysqli_query($conn, $sql);
         $showAlert = true;
-        sendmail($posted_by,$row2['user_email']);
+        sendmail($posted_by);
         if ($showAlert) {
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
   <strong>Added!</strong> Your Comment has been added! 

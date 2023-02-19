@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to eDiscuss - Coding Forums</title>
+    <title>Welcome to eDiscuss - LEARN AND SHARE</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="shortcut icon" href="/eForum/photos/logo-2.svg" type="image/x-icon" />
     <style>
     .carousel-inner>.carousel-item>img {
         width: 1500px;
@@ -83,6 +84,14 @@
         background: #7952b3;
         border-radius: inherit;
     }
+
+    .btn-fix {
+        padding: 0;
+        border: none;
+        white-space: normal;
+    }
+
+    .btn-view {}
     </style>
 </head>
 
@@ -141,16 +150,19 @@
                 $cat = $row['category_name'];
                 $desc = $row['category_description'];  
                 
-                echo '<div class="col-md-4 my-3">
-                <div class="card " style="width:18rem; height:20rem;">
+                echo '
+                <div class="col-md-4 my-3">
+                <a href="threadlist.php?catid='.$id.'" class="btn btn-fix">
+                <div class="card" style="width:18rem; height:21.5rem;">
                     <img height="115px" src="photos/card-'.$id.'.png" class="card-img-top" alt="...">
                     <div class="card-body text-secondary">
                         <h5 class="card-title"><a href="threadlist.php?catid='.$id.'">'.$cat.'</a></h5>
                         <p class="card-text ">'.substr($desc,0,90).'... </p>
-                        <a href="threadlist.php?catid='.$id.'" class="btn btn-secondary">View Threads</a>
+                        <a href="threadlist.php?catid='.$id.'" class="btn btn-secondary btn-view my-0 mx-0 ">View Threads</a>
                     </div>
-                </div>
-            </div>';
+                    </div>
+                    </a>
+                    </div> ';
             }
 
             ?>
