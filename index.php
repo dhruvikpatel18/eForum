@@ -92,6 +92,10 @@
     }
 
     .btn-view {}
+
+    .carousel-item img {
+        justify-content: center;
+    }
     </style>
 </head>
 
@@ -151,7 +155,8 @@
                 $desc = $row['category_description'];  
                 
                 echo '
-                <div class="col-md-4 my-3">
+                
+                <div class="col-md-4 my-3 col d-flex justify-content-center">
                 <a href="threadlist.php?catid='.$id.'" class="btn btn-fix">
                 <div class="card" style="width:18rem; height:21.5rem;">
                     <img height="115px" src="photos/card-'.$id.'.png" class="card-img-top" alt="...">
@@ -162,7 +167,8 @@
                     </div>
                     </div>
                     </a>
-                    </div> ';
+                    </div> 
+                    ';
             }
 
             ?>
